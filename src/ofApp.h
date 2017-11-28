@@ -23,13 +23,19 @@ public:
     int alpha = 255;
     bool tracking = false;
     
+    
+    
+    
     // Drawings:
     // Drawing 01 - Particle Triangle
-    
-    ofParticles p;
-    std::vector<ofParticles> particles;
-    
     void drawing01();
+    void drawParticles();
+    void drawLines();
+    
+    std::vector<ofParticles> particles;
+    std::vector<ofParticles> particles01;
+    std::vector<ofParticles> particles02;
+    
 //
 //    struct Particle {
 //        ofPoint pos;

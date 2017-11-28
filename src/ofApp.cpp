@@ -12,18 +12,20 @@ void ofApp::setup(){
     
     
     // Drawing 01 - Particle Triangle
-    
+    ofParticles p;
     
     for (int i = 0; i < numOfParticles; i++) {
-        p.position.x = 150;
-        p.position.y = 150;
+        p.position.x = ofRandom(0, ofGetWidth());
+        p.position.y = ofRandom(0, ofGetHeight());
         
         p.velocity.x = ofRandom(-2, 2);
         p.velocity.y = ofRandom(-2, 2);
         
         particles.push_back(p);
+        particles01.push_back(p);
+        particles02.push_back(p);
     }
-    
+    cout << particles01.size();
     
 //    Particle p;
 //
@@ -35,6 +37,7 @@ void ofApp::setup(){
 //        particles.push_back(p);
 //    }
 
+    
     // Drawing 02 - Perlin Noise
     cols = w / scl;
     rows = h / scl;
@@ -64,13 +67,15 @@ void ofApp::update(){
     
     
     // Drawing 01 - Particle Triangle
-    
-    for (ofParticles& b: particles) {
-        b.update();
-        
-        // bounce
+    for (ofParticles& a: particles) {
+        a.update();
     }
-    
+    for (ofParticles& b: particles01) {
+        b.update();
+    }
+    for (ofParticles& c: particles02) {
+        c.update();
+    }
     
 }
 
@@ -103,9 +108,13 @@ void ofApp::draw(){
        
     }
     ofSetColor(255, 255, 255, alpha);
-    screenSaver.draw(640, 0, 640, 480);
+    //screenSaver.draw(640, 0, 640, 480);
     
     
+    
+    
+    
+    //DRAWINGS
 //    perlinDraw();
     drawing01();
     
@@ -123,16 +132,64 @@ void ofApp::keyPressed(int key) {
 
 // Drawing 01 - Particle Triangle
 void ofApp::drawing01() {
-    
-    ofSetColor(0);
-//    ofDrawCircle(particles[0].pos.x, particles[0].pos.y, 100);
+    drawParticles();
+    drawLines();
+}
 
+void ofApp::drawParticles() {
+    ofSetColor(0, 0, 0, alpha);
     for (ofParticles& b: particles) {
         b.draw();
     }
-
-
+//    for (ofParticles& b: particles01) {
+//        ofSetColor(ofColor::red);
+//        b.draw();
+//    }
+//    for (ofParticles& b: particles02) {
+//        ofSetColor(ofColor::blue);
+//        b.draw();
+//    }
 }
+
+void ofApp::drawLines() {
+    
+//    for (int i = 0; i < particles.size()-1; i++) {
+//        for (int j = i+1; j < particles.size(); j++) {
+//            float distX = abs(particles[i].position.x - particles[j].position.x);
+//            float distY = abs(particles[i].position.y - particles[j].position.y);
+//
+//            float dist = sqrt((distX*distX) + (distY*distY));
+//
+//            if (dist < 20) {
+//                ofDrawLine(particles[i].position.x, particles[i].position.y, particles[j].position.x, particles02[j].position.y);
+//            }
+//        }
+//    }
+    
+    
+    
+    for (int i = 0; i < particles01.size(); i++) {
+        for (int j = 0; j < particles02.size(); j++) {
+            float distX = abs(particles01[i].position.x - particles02[j].position.x);
+            float distY = abs(particles01[i].position.y - particles02[j].position.y);
+            
+            float dist = sqrt((distX*distX) + (distY*distY));
+
+            if (dist < 100) {
+                ofDrawLine(particles01[i].position.x, particles01[i].position.y, particles02[j].position.x, particles02[j].position.y);
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
 
 
 // Drawing 02 - Perlin Noise
