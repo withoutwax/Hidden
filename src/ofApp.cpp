@@ -4,11 +4,13 @@ using namespace ofxCv;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    ofBackground(255, 255, 255);
+    
     grabber.setup(640, 480);
     tracker.setup();
     
-    screenSaver.load("screensaver.mp4");
-    screenSaver.play();
+    //screenSaver.load("screensaver.mp4");
+    //screenSaver.play();
     
     
     // Drawing 01 - Particle Triangle
@@ -51,7 +53,7 @@ void ofApp::update(){
     if (grabber.isFrameNew()) {
         tracker.update(toCv(grabber));
     }
-    screenSaver.update();
+   //screenSaver.update();
     
     if(tracker.getFound()) {
         if (alpha > 1) {
@@ -65,7 +67,6 @@ void ofApp::update(){
         }
     }
     
-    
     // Drawing 01 - Particle Triangle
     for (ofParticles& a: particles) {
         a.update();
@@ -76,7 +77,6 @@ void ofApp::update(){
     for (ofParticles& c: particles02) {
         c.update();
     }
-    
 }
 
 //--------------------------------------------------------------
@@ -110,7 +110,7 @@ void ofApp::draw(){
     ofSetColor(255, 255, 255, alpha);
     //screenSaver.draw(640, 0, 640, 480);
     
-    
+
     
     
     
@@ -152,20 +152,6 @@ void ofApp::drawParticles() {
 }
 
 void ofApp::drawLines() {
-    
-//    for (int i = 0; i < particles.size()-1; i++) {
-//        for (int j = i+1; j < particles.size(); j++) {
-//            float distX = abs(particles[i].position.x - particles[j].position.x);
-//            float distY = abs(particles[i].position.y - particles[j].position.y);
-//
-//            float dist = sqrt((distX*distX) + (distY*distY));
-//
-//            if (dist < 20) {
-//                ofDrawLine(particles[i].position.x, particles[i].position.y, particles[j].position.x, particles02[j].position.y);
-//            }
-//        }
-//    }
-    
     
     
     for (int i = 0; i < particles01.size(); i++) {

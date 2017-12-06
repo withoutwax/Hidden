@@ -13,5 +13,5 @@ public:
     ofVec3f velocity;
     // ofVec3f acceleration;
     
-    float radius = 5;
+    float radius = 4;
 };

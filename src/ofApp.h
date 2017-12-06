@@ -4,7 +4,7 @@
 #include "ofxCV.h"
 #include "ofParticles.h"
 
-#include "ofxFaceTracker.h"
+#include "ofxFaceTrackerThreaded.h"
 
 class ofApp : public ofBaseApp{
 
@@ -16,7 +16,7 @@ public:
     void keyPressed(int key) override;
 
     ofVideoGrabber grabber;
-    ofxFaceTracker tracker;
+    ofxFaceTrackerThreaded tracker;
     
     ofVideoPlayer screenSaver;
     
