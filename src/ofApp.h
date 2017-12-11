@@ -13,7 +13,7 @@ public:
     void update() override;
     void draw() override;
     
-    void keyPressed(int key) override;
+    //void keyPressed(int key) override;
 
     ofVideoGrabber grabber;
     ofxFaceTrackerThreaded tracker;
@@ -42,7 +42,7 @@ public:
 //    };
 //    vector<Particle> particles;
 //
-    int numOfParticles = 50;
+    int numOfParticles = 100;
     
     
     // Drawing 02 - Perlin Noise

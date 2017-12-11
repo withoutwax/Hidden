@@ -1,4 +1,5 @@
 #include "ofApp.h"
+#include "ofxPS3EyeGrabber.h"
 
 using namespace ofxCv;
 
@@ -6,11 +7,14 @@ using namespace ofxCv;
 void ofApp::setup(){
     ofBackground(255, 255, 255);
     
+    grabber.setGrabber(std::make_shared<ofxPS3EyeGrabber>());
+    
     grabber.setup(640, 480);
     tracker.setup();
     
     //screenSaver.load("screensaver.mp4");
     //screenSaver.play();
+    
     
     
     // Drawing 01 - Particle Triangle
@@ -20,8 +24,8 @@ void ofApp::setup(){
         p.position.x = ofRandom(0, ofGetWidth());
         p.position.y = ofRandom(0, ofGetHeight());
         
-        p.velocity.x = ofRandom(-2, 2);
-        p.velocity.y = ofRandom(-2, 2);
+        p.velocity.x = ofRandom(-1, 1);
+        p.velocity.y = ofRandom(-1, 1);
         
         particles.push_back(p);
         particles01.push_back(p);
@@ -39,6 +43,8 @@ void ofApp::setup(){
 //        particles.push_back(p);
 //    }
 
+    
+    
     
     // Drawing 02 - Perlin Noise
     cols = w / scl;
@@ -120,11 +126,14 @@ void ofApp::draw(){
     
 }
 
-void ofApp::keyPressed(int key) {
-    if(key == 'r') {
-        tracker.reset();
-    }
-}
+
+
+
+//void ofApp::keyPressed(int key) {
+//    if(key == 'r') {
+//        tracker.reset();
+//    }
+//}
 
 
 
@@ -171,13 +180,6 @@ void ofApp::drawLines() {
 
 
 
-
-
-
-
-
-
-
 // Drawing 02 - Perlin Noise
 void ofApp::drawing02() {
     
@@ -220,10 +222,14 @@ void ofApp::perlinDraw() {
 }
 
 
+
+
 // Drawing 03 - Curves (Cars)
 void ofApp::drawing03() {
     
 }
+
+
 
 // Drawing 04 = Diffuse Limited Aggregation
 void ofApp::drawing04() {
