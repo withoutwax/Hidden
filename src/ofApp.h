@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxCV.h"
 #include "ofParticles.h"
+#include "ofVehicles.h"
 
 #include "ofxFaceTrackerThreaded.h"
 
@@ -36,14 +37,8 @@ public:
     std::vector<ofParticles> particles01;
     std::vector<ofParticles> particles02;
     
-//
-//    struct Particle {
-//        ofPoint pos;
-//    };
-//    vector<Particle> particles;
-//
     int numOfParticles = 100;
-    
+    float minDist= 100;
     
     // Drawing 02 - Perlin Noise
     void drawing02();
@@ -66,6 +61,10 @@ public:
     
     // Drawing 03 - Curves (Cars)
     void drawing03();
+    
+    std::vector<ofVehicles> vehicleList;
+    int numVehicles = 100;
+    
     
     // Drawing 04 - Diffuse Limited Aggregation
     void drawing04();

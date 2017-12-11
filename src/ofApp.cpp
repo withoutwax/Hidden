@@ -17,7 +17,8 @@ void ofApp::setup(){
     
     
     
-    // Drawing 01 - Particle Triangle
+    
+    // Drawing 01 - Particle Triangle ===============================
     ofParticles p;
     
     for (int i = 0; i < numOfParticles; i++) {
@@ -32,16 +33,6 @@ void ofApp::setup(){
         particles02.push_back(p);
     }
     cout << particles01.size();
-    
-//    Particle p;
-//
-//    particles.push_back(p);
-//
-//    for (int i = 0; i < numOfParticles; i++) {
-//        p.pos.x = ofRandom(0, ofGetWidth());
-//        p.pos.y = ofRandom(0, ofGetHeight());
-//        particles.push_back(p);
-//    }
 
     
     
@@ -51,6 +42,13 @@ void ofApp::setup(){
     rows = h / scl;
     
     ofEnableAlphaBlending();
+    
+    // Drawing 03 - Vehicles
+    ofVehicles v;
+    for (int i = 0; i < numVehicles; i++) {
+        v.setPosition(ofRandom(0, ofGetWidth()), ofRandom(0, ofGetHeight()));
+        vehicleList.push_back(v);
+    }
 }
 
 //--------------------------------------------------------------
@@ -90,50 +88,43 @@ void ofApp::draw(){
     ofSetColor(255, 255, 255);
     grabber.draw(0, 0);
     tracker.draw();
-    
+
     ofSetColor(0, 0, 0);
     ofDrawBitmapString(ofToString((int) ofGetFrameRate()), 10, 20);
     ofDrawBitmapString(alpha, 10, 70);
-    
-    
+
+
     float fadeTime = 0.5;
-    
+
     if (tracker.getFound()) {
         tracking = true;
         // TRACKING IS TRUE
         // THERE IS FACE ON THE SCREEN
-        
+
        ofDrawBitmapString("TRUE", 10, 50);
-        
+
     } else {
         tracking = false;
         // TRACKING IS FALSE
         // THERE IS NO FACE ON THE SCREEN
-        
+
         ofDrawBitmapString("FALSE", 10, 50);
-       
+
     }
     ofSetColor(255, 255, 255, alpha);
     //screenSaver.draw(640, 0, 640, 480);
-    
 
     
     
-    
     //DRAWINGS
-//    perlinDraw();
+
     drawing01();
-    
+//    drawing02();
+//    drawing03();
 }
 
 
 
-
-//void ofApp::keyPressed(int key) {
-//    if(key == 'r') {
-//        tracker.reset();
-//    }
-//}
 
 
 
@@ -171,6 +162,7 @@ void ofApp::drawLines() {
             float dist = sqrt((distX*distX) + (distY*distY));
 
             if (dist < 100) {
+                ofSetLineWidth(1);
                 ofDrawLine(particles01[i].position.x, particles01[i].position.y, particles02[j].position.x, particles02[j].position.y);
             }
         }
@@ -182,7 +174,7 @@ void ofApp::drawLines() {
 
 // Drawing 02 - Perlin Noise
 void ofApp::drawing02() {
-    
+    perlinDraw();
 }
 
 void ofApp::perlinDraw() {
@@ -224,15 +216,37 @@ void ofApp::perlinDraw() {
 
 
 
-// Drawing 03 - Curves (Cars)
+// Drawing 03 - Curves (Vehicles)
 void ofApp::drawing03() {
+    ofSetLineWidth(10);
     
+    for (int i = 0; i < vehicleList.size(); i++) {
+        float targetX;
+        float targetY;
+        if (i == vehicleList.size() - 1) {
+            targetX = ofGetMouseX();
+            targetY = ofGetMouseY();
+        } else {
+            targetX = vehicleList[i+1].x;
+            targetY = vehicleList[i+1].y;
+        }
+        
+        cout << "TargetX: " << targetX << " TargetY: " << targetY << endl;
+        vehicleList[i].rotateTowards(targetX, targetY, i/100.0);
+        
+        float distanceFromMouseToV = ofDist(vehicleList[i].x, vehicleList[i].y, targetX, targetY);
+        float newSpeed = distanceFromMouseToV * .025;
+        float maxSpeed = 8;
+        float minSpeed = 0;
+        vehicleList[i].setSpeed(ofClamp(newSpeed, minSpeed, maxSpeed));
+        vehicleList[i].move();
+        
+        ofSetColor(ofColor::black);
+        ofDrawLine(vehicleList[i].prevX, vehicleList[i].prevY, vehicleList[i].x, vehicleList[i].y);
+    }
 }
-
-
 
 // Drawing 04 = Diffuse Limited Aggregation
 void ofApp::drawing04() {
     
 }
-
