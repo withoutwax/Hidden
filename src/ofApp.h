@@ -3,7 +3,6 @@
 #include "ofMain.h"
 #include "ofxCV.h"
 #include "ofParticles.h"
-#include "ofVehicles.h"
 
 #include "ofxFaceTrackerThreaded.h"
 
@@ -58,12 +57,6 @@ public:
     
     vector<Terrain> t;
     
-    
-    // Drawing 03 - Curves (Cars)
-    void drawing03();
-    
-    std::vector<ofVehicles> vehicleList;
-    int numVehicles = 100;
     
     
     // Drawing 04 - Diffuse Limited Aggregation

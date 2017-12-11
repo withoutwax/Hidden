@@ -7,7 +7,7 @@ using namespace ofxCv;
 void ofApp::setup(){
     ofBackground(255, 255, 255);
     
-    grabber.setGrabber(std::make_shared<ofxPS3EyeGrabber>());
+    //grabber.setGrabber(std::make_shared<ofxPS3EyeGrabber>());
     
     grabber.setup(640, 480);
     tracker.setup();
@@ -37,19 +37,15 @@ void ofApp::setup(){
     
     
     
-    // Drawing 02 - Perlin Noise
+    // Drawing 02 - Perlin Noise ===============================
     cols = w / scl;
     rows = h / scl;
     
     ofEnableAlphaBlending();
     
-    // Drawing 03 - Vehicles
-    ofVehicles v;
-    for (int i = 0; i < numVehicles; i++) {
-        v.setPosition(ofRandom(0, ofGetWidth()), ofRandom(0, ofGetHeight()));
-        vehicleList.push_back(v);
-    }
 }
+
+
 
 //--------------------------------------------------------------
 void ofApp::update(){
@@ -83,6 +79,9 @@ void ofApp::update(){
     }
 }
 
+
+
+
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofSetColor(255, 255, 255);
@@ -114,13 +113,10 @@ void ofApp::draw(){
     ofSetColor(255, 255, 255, alpha);
     //screenSaver.draw(640, 0, 640, 480);
 
-    
-    
     //DRAWINGS
 
     drawing01();
 //    drawing02();
-//    drawing03();
 }
 
 
@@ -128,9 +124,7 @@ void ofApp::draw(){
 
 
 
-
-
-// Drawing 01 - Particle Triangle
+// Drawing 01 - Particle Triangle ===================================
 void ofApp::drawing01() {
     drawParticles();
     drawLines();
@@ -172,7 +166,7 @@ void ofApp::drawLines() {
 
 
 
-// Drawing 02 - Perlin Noise
+// Drawing 02 - Perlin Noise ====================================
 void ofApp::drawing02() {
     perlinDraw();
 }
@@ -180,7 +174,7 @@ void ofApp::drawing02() {
 void ofApp::perlinDraw() {
     float terrain[cols][rows];
     
-    ofSetColor(255, 255, 255, alpha);
+    ofSetColor(0, 0, 0, alpha);
     ofNoFill();
     
     flying -= 0.05;
@@ -215,38 +209,10 @@ void ofApp::perlinDraw() {
 
 
 
-
-// Drawing 03 - Curves (Vehicles)
-void ofApp::drawing03() {
-    ofSetLineWidth(10);
-    
-    for (int i = 0; i < vehicleList.size(); i++) {
-        float targetX;
-        float targetY;
-        if (i == vehicleList.size() - 1) {
-            targetX = ofGetMouseX();
-            targetY = ofGetMouseY();
-        } else {
-            targetX = vehicleList[i+1].x;
-            targetY = vehicleList[i+1].y;
-        }
-        
-        cout << "TargetX: " << targetX << " TargetY: " << targetY << endl;
-        vehicleList[i].rotateTowards(targetX, targetY, i/100.0);
-        
-        float distanceFromMouseToV = ofDist(vehicleList[i].x, vehicleList[i].y, targetX, targetY);
-        float newSpeed = distanceFromMouseToV * .025;
-        float maxSpeed = 8;
-        float minSpeed = 0;
-        vehicleList[i].setSpeed(ofClamp(newSpeed, minSpeed, maxSpeed));
-        vehicleList[i].move();
-        
-        ofSetColor(ofColor::black);
-        ofDrawLine(vehicleList[i].prevX, vehicleList[i].prevY, vehicleList[i].x, vehicleList[i].y);
-    }
-}
-
 // Drawing 04 = Diffuse Limited Aggregation
 void ofApp::drawing04() {
     
 }
+
+
+
