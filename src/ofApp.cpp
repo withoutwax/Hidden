@@ -25,8 +25,8 @@ void ofApp::setup(){
         p.position.x = ofRandom(0, ofGetWidth());
         p.position.y = ofRandom(0, ofGetHeight());
         
-        p.velocity.x = ofRandom(-1, 1);
-        p.velocity.y = ofRandom(-1, 1);
+        p.velocity.x = ofRandom(-.5, .5);
+        p.velocity.y = ofRandom(-.5, .5);
         
         particles.push_back(p);
         particles01.push_back(p);
@@ -117,6 +117,14 @@ void ofApp::draw(){
 
     drawing01();
 //    drawing02();
+    
+    /*
+    int minHeight = ofGetHeight()/3;
+    int maxHeight = ofGetHeight()*(2/3);
+    int minWidth = (ofGetWidth()/2)-(minHeight/2);
+    int maxWidth = (ofGetWidth()/2)+(minHeight/2);
+    ofDrawRectangle(minWidth, minHeight, abs(minWidth-maxWidth), abs(minHeight-maxHeight));
+     */
 }
 
 
@@ -162,6 +170,8 @@ void ofApp::drawLines() {
         }
     }
 }
+
+
 
 
 
