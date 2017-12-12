@@ -36,8 +36,8 @@ void ofParticles::update(){
 void ofParticles::draw(){
     ofDrawCircle(position, radius);
     
-    cout << "minHeight: " << minHeight << endl;
-    cout << "maxHeight: " << maxHeight << endl;
+//    cout << "minHeight: " << minHeight << endl;
+//    cout << "maxHeight: " << maxHeight << endl;
 }
 
 

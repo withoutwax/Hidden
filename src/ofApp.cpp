@@ -19,8 +19,9 @@ void ofApp::setup(){
     
     
     // Drawing 01 - Particle Triangle ===============================
-    ofParticles p;
     
+    /*
+    ofParticles p;
     for (int i = 0; i < numOfParticles; i++) {
         p.position.x = ofRandom(0, ofGetWidth());
         p.position.y = ofRandom(0, ofGetHeight());
@@ -33,7 +34,7 @@ void ofApp::setup(){
         particles02.push_back(p);
     }
     cout << particles01.size();
-
+     */
     
     
     
@@ -66,7 +67,8 @@ void ofApp::update(){
             alpha = alpha * 2;
         }
     }
-    
+    addParticles();
+    trackingPrev = tracking;
     // Drawing 01 - Particle Triangle
     for (ofParticles& a: particles) {
         a.update();
@@ -82,6 +84,9 @@ void ofApp::update(){
 
 
 
+
+
+
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofSetColor(255, 255, 255);
@@ -91,6 +96,7 @@ void ofApp::draw(){
     ofSetColor(0, 0, 0);
     ofDrawBitmapString(ofToString((int) ofGetFrameRate()), 10, 20);
     ofDrawBitmapString(alpha, 10, 70);
+    ofDrawBitmapString(particles.size(),10, 80);
 
 
     float fadeTime = 0.5;
@@ -99,17 +105,16 @@ void ofApp::draw(){
         tracking = true;
         // TRACKING IS TRUE
         // THERE IS FACE ON THE SCREEN
-
-       ofDrawBitmapString("TRUE", 10, 50);
-
+        
+        ofDrawBitmapString("TRUE", 10, 50);
     } else {
         tracking = false;
         // TRACKING IS FALSE
         // THERE IS NO FACE ON THE SCREEN
-
+        
         ofDrawBitmapString("FALSE", 10, 50);
-
     }
+    
     ofSetColor(255, 255, 255, alpha);
     //screenSaver.draw(640, 0, 640, 480);
 
@@ -171,6 +176,20 @@ void ofApp::drawLines() {
     }
 }
 
+void ofApp::addParticles() {
+    
+    if (trackingPrev == false && tracking == true) {
+        p.position.x = ofRandom(0, ofGetWidth());
+        p.position.y = ofRandom(0, ofGetHeight());
+        
+        p.velocity.x = ofRandom(-.5, .5);
+        p.velocity.y = ofRandom(-.5, .5);
+        
+        particles.push_back(p);
+        particles01.push_back(p);
+        particles02.push_back(p);
+    }
+}
 
 
 

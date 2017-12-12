@@ -31,6 +31,9 @@ public:
     void drawing01();
     void drawParticles();
     void drawLines();
+    void addParticles();
+    
+    ofParticles p;
     
     std::vector<ofParticles> particles;
     std::vector<ofParticles> particles01;
@@ -38,6 +41,10 @@ public:
     
     int numOfParticles = 100;
     float minDist= 100;
+    
+    bool trackingPrev = false;
+    
+    
     
     // Drawing 02 - Perlin Noise
     void drawing02();
