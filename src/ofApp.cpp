@@ -37,11 +37,11 @@ void ofApp::setup(){
      */
     
     
-    
+    /*
     // Drawing 02 - Perlin Noise ===============================
     cols = w / scl;
     rows = h / scl;
-    
+    */
     ofEnableAlphaBlending();
     
 }
