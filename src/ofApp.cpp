@@ -7,7 +7,7 @@ using namespace ofxCv;
 void ofApp::setup(){
     ofBackground(255, 255, 255);
     
-    //grabber.setGrabber(std::make_shared<ofxPS3EyeGrabber>());
+    grabber.setGrabber(std::make_shared<ofxPS3EyeGrabber>());
     
     grabber.setup(640, 480);
     tracker.setup();
