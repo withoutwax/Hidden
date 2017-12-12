@@ -32,6 +32,7 @@ public:
     void drawParticles();
     void drawLines();
     void addParticles();
+    void clearParticles();
     
     ofParticles p;
     
@@ -45,7 +46,7 @@ public:
     bool trackingPrev = false;
     
     
-    
+    /*
     // Drawing 02 - Perlin Noise
     void drawing02();
     void perlinDraw();
@@ -63,9 +64,10 @@ public:
     };
     
     vector<Terrain> t;
+    */
     
-    
-    
+    /*
     // Drawing 04 - Diffuse Limited Aggregation
     void drawing04();
+     */
 };

@@ -79,6 +79,7 @@ void ofApp::update(){
     for (ofParticles& c: particles02) {
         c.update();
     }
+    clearParticles();
 }
 
 
@@ -90,14 +91,15 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofSetColor(255, 255, 255);
-    grabber.draw(0, 0);
-    tracker.draw();
+    //grabber.draw(0, 0);
+    //tracker.draw();
 
     ofSetColor(0, 0, 0);
+    /*
     ofDrawBitmapString(ofToString((int) ofGetFrameRate()), 10, 20);
     ofDrawBitmapString(alpha, 10, 70);
     ofDrawBitmapString(particles.size(),10, 80);
-
+     */
 
     float fadeTime = 0.5;
 
@@ -106,20 +108,19 @@ void ofApp::draw(){
         // TRACKING IS TRUE
         // THERE IS FACE ON THE SCREEN
         
-        ofDrawBitmapString("TRUE", 10, 50);
+        //ofDrawBitmapString("TRUE", 10, 50);
     } else {
         tracking = false;
         // TRACKING IS FALSE
         // THERE IS NO FACE ON THE SCREEN
         
-        ofDrawBitmapString("FALSE", 10, 50);
+        //ofDrawBitmapString("FALSE", 10, 50);
     }
     
     ofSetColor(255, 255, 255, alpha);
     //screenSaver.draw(640, 0, 640, 480);
 
     //DRAWINGS
-
     drawing01();
 //    drawing02();
     
@@ -191,10 +192,17 @@ void ofApp::addParticles() {
     }
 }
 
+void ofApp::clearParticles() {
+    if (particles.size() > 1000) {
+        particles.clear();
+        particles01.clear();
+        particles02.clear();
+    }
+}
 
 
 
-
+/*
 // Drawing 02 - Perlin Noise ====================================
 void ofApp::drawing02() {
     perlinDraw();
@@ -235,13 +243,14 @@ void ofApp::perlinDraw() {
         ofEndShape();
     }
 }
+*/
 
-
-
+/*
 // Drawing 04 = Diffuse Limited Aggregation
 void ofApp::drawing04() {
     
 }
+ */
 
 
 
